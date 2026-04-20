@@ -1,0 +1,180 @@
+/* WP Social Share Lite - Public Styles v2.0.0 */
+
+.wpssl-wrap {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 20px 0;
+    padding: 16px;
+    border-top: 1px solid #e5e7eb;
+    border-bottom: 1px solid #e5e7eb;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    box-sizing: border-box;
+}
+
+.wpssl-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #374151;
+    margin-right: 4px;
+}
+
+.wpssl-total-count {
+    font-size: 12px;
+    color: #6b7280;
+    margin-right: 8px;
+}
+
+.wpssl-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+/* Buttons */
+.wpssl-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none !important;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1;
+    cursor: pointer;
+    transition: filter 0.2s, transform 0.1s;
+    border: none;
+    position: relative;
+}
+.wpssl-btn:hover { filter: brightness(0.88); transform: translateY(-1px); }
+.wpssl-btn:active { transform: translateY(0); }
+
+.wpssl-icon { display: flex; align-items: center; }
+.wpssl-icon svg { display: block; }
+.wpssl-net-label { white-space: nowrap; }
+
+.wpssl-count {
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+    padding: 1px 6px;
+    font-size: 11px;
+    min-width: 18px;
+    text-align: center;
+}
+
+/* ---- Sizes ---- */
+.wpssl-size-small .wpssl-btn  { padding: 5px 10px; font-size: 12px; }
+.wpssl-size-small .wpssl-icon svg { width: 14px; height: 14px; }
+.wpssl-size-medium .wpssl-btn { padding: 7px 14px; }
+.wpssl-size-medium .wpssl-icon svg { width: 16px; height: 16px; }
+.wpssl-size-large .wpssl-btn  { padding: 10px 18px; font-size: 15px; }
+.wpssl-size-large .wpssl-icon svg { width: 20px; height: 20px; }
+
+/* ---- Shapes ---- */
+.wpssl-shape-square .wpssl-btn  { border-radius: 0; }
+.wpssl-shape-rounded .wpssl-btn { border-radius: 6px; }
+.wpssl-shape-pill .wpssl-btn    { border-radius: 999px; }
+
+/* ---- Color Schemes ---- */
+
+/* Brand colors */
+.wpssl-color-brand .wpssl-btn {
+    background: var(--wpssl-brand, #374151);
+    color: #fff !important;
+}
+
+/* Monochrome */
+.wpssl-color-monochrome .wpssl-btn {
+    background: #374151;
+    color: #fff !important;
+}
+.wpssl-color-monochrome .wpssl-btn:hover { background: #1f2937; filter: none; }
+
+/* Custom */
+.wpssl-color-custom .wpssl-btn {
+    background: var(--wpssl-custom-bg, #333);
+    color: var(--wpssl-custom-text, #fff) !important;
+}
+
+/* ---- Floating / Sticky ---- */
+.wpssl-floating {
+    position: fixed;
+    z-index: 9999;
+}
+.wpssl-floating-left {
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    flex-direction: column;
+}
+.wpssl-floating-left .wpssl-wrap {
+    flex-direction: column;
+    border: none;
+    background: #fff;
+    box-shadow: 2px 0 12px rgba(0,0,0,0.12);
+    padding: 12px 8px;
+    margin: 0;
+    border-radius: 0 8px 8px 0;
+}
+.wpssl-floating-left .wpssl-buttons { flex-direction: column; }
+.wpssl-floating-left .wpssl-label,
+.wpssl-floating-left .wpssl-total-count { display: none; }
+
+.wpssl-floating-right {
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.wpssl-floating-right .wpssl-wrap {
+    flex-direction: column;
+    border: none;
+    background: #fff;
+    box-shadow: -2px 0 12px rgba(0,0,0,0.12);
+    padding: 12px 8px;
+    margin: 0;
+    border-radius: 8px 0 0 8px;
+}
+.wpssl-floating-right .wpssl-buttons { flex-direction: column; }
+.wpssl-floating-right .wpssl-label,
+.wpssl-floating-right .wpssl-total-count { display: none; }
+
+.wpssl-floating-sticky-bottom {
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+.wpssl-floating-sticky-bottom .wpssl-wrap {
+    border: none;
+    margin: 0;
+    border-radius: 0;
+    justify-content: center;
+    background: #fff;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.1);
+    padding: 10px 16px;
+}
+
+/* Copy link feedback */
+.wpssl-copy-toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: #111827;
+    color: #fff;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 13px;
+    z-index: 99999;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+}
+.wpssl-copy-toast.wpssl-toast-show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Mobile hide */
+@media (max-width: 768px) {
+    .wpssl-hide-mobile { display: none !important; }
+}

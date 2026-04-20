@@ -1,0 +1,173 @@
+/* WP Social Share Lite - Admin Styles v2.0.0 */
+
+.wpssl-admin-wrap { max-width: 1200px; }
+
+.wpssl-admin-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 20px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid #e5e7eb;
+}
+.wpssl-admin-header h1 { margin: 0; }
+.wpssl-version {
+    background: #6366f1;
+    color: #fff;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 11px;
+    font-weight: 600;
+}
+
+/* Layout */
+.wpssl-admin-layout {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 24px;
+    align-items: start;
+}
+
+/* Section cards */
+.wpssl-section {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+}
+.wpssl-section-title {
+    margin: 0 0 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #f3f4f6;
+    font-size: 14px;
+    font-weight: 600;
+    color: #111827;
+}
+.wpssl-section .form-table th { width: 180px; font-weight: 500; }
+
+/* Toggle */
+.wpssl-toggle {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+    vertical-align: middle;
+    margin-right: 10px;
+}
+.wpssl-toggle input { opacity: 0; width: 0; height: 0; }
+.wpssl-toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    inset: 0;
+    background: #d1d5db;
+    border-radius: 24px;
+    transition: .3s;
+}
+.wpssl-toggle-slider:before {
+    content: '';
+    position: absolute;
+    height: 18px; width: 18px;
+    left: 3px; bottom: 3px;
+    background: #fff;
+    border-radius: 50%;
+    transition: .3s;
+}
+.wpssl-toggle input:checked + .wpssl-toggle-slider { background: #6366f1; }
+.wpssl-toggle input:checked + .wpssl-toggle-slider:before { transform: translateX(20px); }
+
+/* Networks list */
+.wpssl-networks-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+.wpssl-network-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 10px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    margin-bottom: 6px;
+    background: #fafafa;
+    cursor: grab;
+}
+.wpssl-network-item:hover { background: #f3f4f6; }
+.wpssl-drag-handle { cursor: grab; color: #9ca3af; }
+.wpssl-net-dot {
+    display: inline-block;
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+/* Preview Panel */
+.wpssl-preview-panel {
+    position: sticky;
+    top: 32px;
+}
+.wpssl-preview-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.wpssl-preview-header h3 { margin: 0; }
+.wpssl-preview-box {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 20px;
+    min-height: 200px;
+}
+.wpssl-preview-placeholder {
+    color: #9ca3af;
+    text-align: center;
+    margin-top: 40px;
+    font-style: italic;
+}
+.wpssl-preview-mock-content { margin: 12px 0; }
+.wpssl-mock-title {
+    height: 18px;
+    background: #e5e7eb;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    width: 60%;
+}
+.wpssl-mock-text {
+    height: 10px;
+    background: #f3f4f6;
+    border-radius: 4px;
+    margin-bottom: 6px;
+}
+.wpssl-mock-text--short { width: 70%; }
+
+/* Stats grid */
+.wpssl-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+.wpssl-stat-card {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 16px;
+    text-align: center;
+}
+.wpssl-stat-card--big {
+    background: #6366f1;
+    color: #fff;
+    grid-column: span 2;
+}
+.wpssl-stat-card--big .wpssl-stat-number { font-size: 36px; color: #fff; }
+.wpssl-stat-card--big .wpssl-stat-label { color: rgba(255,255,255,0.8); }
+.wpssl-stat-icon { width: 28px; height: 28px; margin: 0 auto 8px; }
+.wpssl-stat-icon svg { width: 100%; height: 100%; }
+.wpssl-stat-number { font-size: 24px; font-weight: 700; color: #111827; line-height: 1; }
+.wpssl-stat-label { font-size: 12px; color: #6b7280; margin-top: 4px; }
+
+/* Preview shared styles injection */
+#wpssl-preview-output .wpssl-wrap { font-family: -apple-system, sans-serif; }
