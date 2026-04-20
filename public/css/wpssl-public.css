@@ -1,180 +1,203 @@
-/* WP Social Share Lite - Public Styles v2.0.0 */
+/* WP Social Share Lite — Public Styles v2.0.1 */
 
 .wpssl-wrap {
-    display: flex;
+    display: flex !important;
     flex-wrap: wrap;
     align-items: center;
     gap: 8px;
-    margin: 20px 0;
-    padding: 16px;
-    border-top: 1px solid #e5e7eb;
-    border-bottom: 1px solid #e5e7eb;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    margin: 20px 0 !important;
+    padding: 14px 16px !important;
+    border-top: 2px solid #e2e8f0;
+    border-bottom: 2px solid #e2e8f0;
+    background: transparent !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     box-sizing: border-box;
+    line-height: 1 !important;
 }
 
 .wpssl-label {
-    font-size: 13px;
-    font-weight: 600;
-    color: #374151;
-    margin-right: 4px;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #374151 !important;
+    margin-right: 6px;
+    white-space: nowrap;
 }
 
 .wpssl-total-count {
-    font-size: 12px;
-    color: #6b7280;
-    margin-right: 8px;
+    font-size: 12px !important;
+    color: #6b7280 !important;
+    margin-right: 10px;
+    white-space: nowrap;
 }
+.wpssl-total-count strong { color: #374151; }
 
 .wpssl-buttons {
-    display: flex;
+    display: flex !important;
     flex-wrap: wrap;
     gap: 6px;
 }
 
-/* Buttons */
+/* ── Buttons ────────────────────────────────────── */
 .wpssl-btn {
-    display: inline-flex;
-    align-items: center;
+    display: inline-flex !important;
+    align-items: center !important;
     gap: 6px;
     text-decoration: none !important;
-    font-size: 13px;
-    font-weight: 500;
-    line-height: 1;
+    font-weight: 600 !important;
+    line-height: 1 !important;
     cursor: pointer;
-    transition: filter 0.2s, transform 0.1s;
-    border: none;
+    transition: filter 0.2s, transform 0.15s;
+    border: none !important;
+    outline: none;
     position: relative;
+    box-shadow: none;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
 }
-.wpssl-btn:hover { filter: brightness(0.88); transform: translateY(-1px); }
+.wpssl-btn:hover {
+    filter: brightness(0.87) !important;
+    transform: translateY(-1px);
+    text-decoration: none !important;
+}
 .wpssl-btn:active { transform: translateY(0); }
+.wpssl-btn:visited { text-decoration: none !important; }
 
-.wpssl-icon { display: flex; align-items: center; }
-.wpssl-icon svg { display: block; }
-.wpssl-net-label { white-space: nowrap; }
+/* ── Icon ───────────────────────────────────────── */
+.wpssl-icon {
+    display: flex !important;
+    align-items: center !important;
+    flex-shrink: 0;
+    line-height: 0;
+}
+/* Strict SVG sizing — prevents themes from blowing them up */
+.wpssl-icon svg,
+.wpssl-icon > svg {
+    display: block !important;
+    flex-shrink: 0 !important;
+    max-width: none !important;
+    max-height: none !important;
+}
 
+.wpssl-net-label {
+    white-space: nowrap;
+    font-size: inherit;
+    color: inherit;
+}
+
+/* ── Per-button share count ─────────────────────── */
 .wpssl-count {
-    background: rgba(0,0,0,0.2);
-    border-radius: 10px;
-    padding: 1px 6px;
-    font-size: 11px;
-    min-width: 18px;
+    background: rgba(0,0,0,0.18);
+    border-radius: 20px;
+    padding: 2px 7px;
+    font-size: 11px !important;
+    font-weight: 700 !important;
+    min-width: 20px;
     text-align: center;
+    color: inherit !important;
+    line-height: 1.4;
 }
 
-/* ---- Sizes ---- */
-.wpssl-size-small .wpssl-btn  { padding: 5px 10px; font-size: 12px; }
-.wpssl-size-small .wpssl-icon svg { width: 14px; height: 14px; }
-.wpssl-size-medium .wpssl-btn { padding: 7px 14px; }
-.wpssl-size-medium .wpssl-icon svg { width: 16px; height: 16px; }
-.wpssl-size-large .wpssl-btn  { padding: 10px 18px; font-size: 15px; }
-.wpssl-size-large .wpssl-icon svg { width: 20px; height: 20px; }
+/* ── Sizes ──────────────────────────────────────── */
+.wpssl-size-small  .wpssl-btn { padding: 5px 10px !important; font-size: 12px !important; }
+.wpssl-size-small  .wpssl-icon svg { width: 14px !important; height: 14px !important; }
+.wpssl-size-medium .wpssl-btn { padding: 8px 14px !important; font-size: 13px !important; }
+.wpssl-size-medium .wpssl-icon svg { width: 16px !important; height: 16px !important; }
+.wpssl-size-large  .wpssl-btn { padding: 10px 18px !important; font-size: 14px !important; }
+.wpssl-size-large  .wpssl-icon svg { width: 20px !important; height: 20px !important; }
 
-/* ---- Shapes ---- */
-.wpssl-shape-square .wpssl-btn  { border-radius: 0; }
-.wpssl-shape-rounded .wpssl-btn { border-radius: 6px; }
-.wpssl-shape-pill .wpssl-btn    { border-radius: 999px; }
+/* ── Shapes ─────────────────────────────────────── */
+.wpssl-shape-square  .wpssl-btn { border-radius: 0 !important; }
+.wpssl-shape-rounded .wpssl-btn { border-radius: 6px !important; }
+.wpssl-shape-pill    .wpssl-btn { border-radius: 999px !important; }
 
-/* ---- Color Schemes ---- */
-
-/* Brand colors */
+/* ── Color: Brand ───────────────────────────────── */
 .wpssl-color-brand .wpssl-btn {
-    background: var(--wpssl-brand, #374151);
-    color: #fff !important;
+    background-color: var(--wpssl-brand, #374151) !important;
+    color: #ffffff !important;
+    fill: #ffffff;
 }
+.wpssl-color-brand .wpssl-btn * { color: #ffffff !important; }
+.wpssl-color-brand .wpssl-icon svg { color: #ffffff !important; fill: #ffffff !important; }
 
-/* Monochrome */
+/* ── Color: Monochrome ──────────────────────────── */
 .wpssl-color-monochrome .wpssl-btn {
-    background: #374151;
-    color: #fff !important;
+    background-color: #374151 !important;
+    color: #ffffff !important;
 }
-.wpssl-color-monochrome .wpssl-btn:hover { background: #1f2937; filter: none; }
+.wpssl-color-monochrome .wpssl-btn * { color: #ffffff !important; }
+.wpssl-color-monochrome .wpssl-btn:hover { background-color: #1f2937 !important; filter: none !important; }
 
-/* Custom */
+/* ── Color: Custom ──────────────────────────────── */
 .wpssl-color-custom .wpssl-btn {
-    background: var(--wpssl-custom-bg, #333);
-    color: var(--wpssl-custom-text, #fff) !important;
+    background-color: var(--wpssl-custom-bg, #333333) !important;
+    color: var(--wpssl-custom-text, #ffffff) !important;
 }
+.wpssl-color-custom .wpssl-btn * { color: var(--wpssl-custom-text, #ffffff) !important; }
 
-/* ---- Floating / Sticky ---- */
-.wpssl-floating {
-    position: fixed;
-    z-index: 9999;
-}
-.wpssl-floating-left {
-    left: 0;
-    top: 50%;
-    transform: translateY(-50%);
-    flex-direction: column;
-}
-.wpssl-floating-left .wpssl-wrap {
-    flex-direction: column;
-    border: none;
-    background: #fff;
-    box-shadow: 2px 0 12px rgba(0,0,0,0.12);
-    padding: 12px 8px;
-    margin: 0;
-    border-radius: 0 8px 8px 0;
-}
-.wpssl-floating-left .wpssl-buttons { flex-direction: column; }
-.wpssl-floating-left .wpssl-label,
-.wpssl-floating-left .wpssl-total-count { display: none; }
-
-.wpssl-floating-right {
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%);
-}
-.wpssl-floating-right .wpssl-wrap {
-    flex-direction: column;
-    border: none;
-    background: #fff;
-    box-shadow: -2px 0 12px rgba(0,0,0,0.12);
-    padding: 12px 8px;
-    margin: 0;
-    border-radius: 8px 0 0 8px;
-}
-.wpssl-floating-right .wpssl-buttons { flex-direction: column; }
-.wpssl-floating-right .wpssl-label,
-.wpssl-floating-right .wpssl-total-count { display: none; }
-
-.wpssl-floating-sticky-bottom {
-    bottom: 0;
-    left: 0;
-    right: 0;
-}
-.wpssl-floating-sticky-bottom .wpssl-wrap {
-    border: none;
-    margin: 0;
-    border-radius: 0;
-    justify-content: center;
-    background: #fff;
-    box-shadow: 0 -2px 12px rgba(0,0,0,0.1);
-    padding: 10px 16px;
-}
-
-/* Copy link feedback */
+/* ── Copy toast notification ────────────────────── */
 .wpssl-copy-toast {
     position: fixed;
-    bottom: 24px;
+    bottom: 28px;
     left: 50%;
-    transform: translateX(-50%) translateY(20px);
-    background: #111827;
+    transform: translateX(-50%) translateY(16px);
+    background: #1f2937;
     color: #fff;
-    padding: 8px 16px;
-    border-radius: 6px;
+    padding: 9px 18px;
+    border-radius: 8px;
     font-size: 13px;
     z-index: 99999;
     opacity: 0;
-    transition: opacity 0.3s, transform 0.3s;
+    transition: opacity 0.25s, transform 0.25s;
     pointer-events: none;
+    white-space: nowrap;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
 }
 .wpssl-copy-toast.wpssl-toast-show {
     opacity: 1;
     transform: translateX(-50%) translateY(0);
 }
 
-/* Mobile hide */
+/* ── Floating / Sticky layouts ──────────────────── */
+.wpssl-floating { position: fixed; z-index: 9999; }
+
+.wpssl-floating-left  { left: 0; top: 50%; transform: translateY(-50%); }
+.wpssl-floating-right { right: 0; top: 50%; transform: translateY(-50%); }
+
+.wpssl-floating-left  .wpssl-wrap,
+.wpssl-floating-right .wpssl-wrap {
+    flex-direction: column !important;
+    border: none !important;
+    background: #fff !important;
+    padding: 10px 8px !important;
+    margin: 0 !important;
+    gap: 6px !important;
+    box-shadow: 2px 2px 12px rgba(0,0,0,0.12);
+}
+.wpssl-floating-left  .wpssl-wrap { border-radius: 0 8px 8px 0; box-shadow: 2px 0 12px rgba(0,0,0,0.12); }
+.wpssl-floating-right .wpssl-wrap { border-radius: 8px 0 0 8px; box-shadow: -2px 0 12px rgba(0,0,0,0.12); }
+.wpssl-floating-left  .wpssl-buttons,
+.wpssl-floating-right .wpssl-buttons { flex-direction: column !important; }
+.wpssl-floating-left  .wpssl-label,
+.wpssl-floating-left  .wpssl-total-count,
+.wpssl-floating-right .wpssl-label,
+.wpssl-floating-right .wpssl-total-count { display: none !important; }
+/* Floating: icon-only to save space */
+.wpssl-floating-left  .wpssl-net-label,
+.wpssl-floating-right .wpssl-net-label { display: none !important; }
+.wpssl-floating-left  .wpssl-btn,
+.wpssl-floating-right .wpssl-btn { padding: 8px !important; justify-content: center; }
+
+.wpssl-floating-sticky-bottom { bottom: 0; left: 0; right: 0; }
+.wpssl-floating-sticky-bottom .wpssl-wrap {
+    border: none !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+    justify-content: center !important;
+    background: #fff !important;
+    box-shadow: 0 -2px 12px rgba(0,0,0,0.1) !important;
+    padding: 10px 16px !important;
+}
+
+/* ── Mobile hide ────────────────────────────────── */
 @media (max-width: 768px) {
     .wpssl-hide-mobile { display: none !important; }
 }

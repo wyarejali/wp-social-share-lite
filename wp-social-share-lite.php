@@ -3,7 +3,7 @@
  * Plugin Name: WP Social Share Lite
  * Plugin URI:  https://wyarejali.com/plugins/wp-social-share-lite
  * Description: Auto-inject customizable social sharing buttons into posts, pages, and custom post types with share count tracking, floating bar, Open Graph tags, and a full settings dashboard.
- * Version:     2.0.0
+ * Version:     2.0.1
  * Author:      Wyarej Ali
  * Author URI:  https://wyarejali.com
  * License:     GPL-2.0+
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Constants
-define( 'WPSSL_VERSION',     '2.0.0' );
+define( 'WPSSL_VERSION',     '2.0.1' );
 define( 'WPSSL_PLUGIN_DIR',  plugin_dir_path( __FILE__ ) );
 define( 'WPSSL_PLUGIN_URL',  plugin_dir_url( __FILE__ ) );
 define( 'WPSSL_PLUGIN_FILE', __FILE__ );

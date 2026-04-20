@@ -55,6 +55,12 @@ class WPSSL_Options {
 
             // Open Graph
             'og_enabled'        => '1',
+
+            // Custom Link Button
+            'custom_link_enabled' => '0',
+            'custom_link_label'   => 'Visit',
+            'custom_link_url'     => '',
+            'custom_link_color'   => '#6366f1',
         ];
     }
 
@@ -91,7 +97,12 @@ class WPSSL_Options {
         $clean['custom_text']      = sanitize_hex_color( $data['custom_text'] ?? '#ffffff' );
         $clean['custom_hover_bg']  = sanitize_hex_color( $data['custom_hover_bg'] ?? '#555555' );
 
-        $clean['og_enabled']       = isset( $data['og_enabled'] ) ? '1' : '0';
+        $clean['og_enabled']          = isset( $data['og_enabled'] ) ? '1' : '0';
+
+        $clean['custom_link_enabled'] = isset( $data['custom_link_enabled'] ) ? '1' : '0';
+        $clean['custom_link_label']   = sanitize_text_field( $data['custom_link_label'] ?? 'Visit' );
+        $clean['custom_link_url']     = esc_url_raw( $data['custom_link_url'] ?? '' );
+        $clean['custom_link_color']   = sanitize_hex_color( $data['custom_link_color'] ?? '#6366f1' );
 
         update_option( self::OPTION_KEY, $clean );
         return $clean;

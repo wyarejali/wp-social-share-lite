@@ -1,173 +1,463 @@
-/* WP Social Share Lite - Admin Styles v2.0.0 */
+/* WP Social Share Lite — Admin Styles v2.0.1 */
 
-.wpssl-admin-wrap { max-width: 1200px; }
+/* ========================================
+   RESET WORDPRESS DEFAULTS ON OUR PAGE
+   ======================================== */
+.wpssl-page-wrap { margin: 0 !important; padding: 0; max-width: none; }
+.wpssl-page-wrap .wrap { display: none; } /* hide WP default wrap padding */
 
-.wpssl-admin-header {
+/* Push WP's own title/h1 out of the way — we have our own header */
+.wp-admin.toplevel_page_wp-social-share-lite #wpcontent,
+.wp-admin.social-share_page_wpssl-stats #wpcontent { padding-left: 20px; }
+
+/* ========================================
+   HEADER — AIOSEO STYLE
+   ======================================== */
+.wpssl-header {
+    background: #fff;
+    border-bottom: 1px solid #e2e8f0;
+    margin: -10px -20px 0 -20px; /* bleed to edges */
+    padding: 0 20px;
+    position: relative;
+    z-index: 100;
+}
+.wpssl-header-inner { max-width: 1200px; margin: 0 auto; }
+
+.wpssl-header-top {
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 20px;
-    padding-bottom: 16px;
-    border-bottom: 2px solid #e5e7eb;
-}
-.wpssl-admin-header h1 { margin: 0; }
-.wpssl-version {
-    background: #6366f1;
-    color: #fff;
-    padding: 3px 8px;
-    border-radius: 12px;
-    font-size: 11px;
-    font-weight: 600;
+    justify-content: space-between;
+    padding: 20px 0 16px;
 }
 
-/* Layout */
+.wpssl-brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+.wpssl-brand-icon {
+    font-size: 32px !important;
+    width: 32px !important;
+    height: 32px !important;
+    color: #6366f1;
+    flex-shrink: 0;
+}
+.wpssl-brand-name {
+    margin: 0 !important;
+    padding: 0 !important;
+    font-size: 20px !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+    line-height: 1.2 !important;
+    border: none !important;
+}
+.wpssl-brand-desc {
+    margin: 2px 0 0 !important;
+    font-size: 12px !important;
+    color: #64748b !important;
+    line-height: 1.4 !important;
+}
+.wpssl-version-badge {
+    background: #6366f1;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 9px;
+    border-radius: 20px;
+    margin-left: 8px;
+    flex-shrink: 0;
+}
+
+/* Save button in header */
+.wpssl-save-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #6366f1 !important;
+    color: #fff !important;
+    border: none !important;
+    border-radius: 6px;
+    padding: 9px 20px !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.15s, box-shadow 0.15s;
+    box-shadow: 0 1px 3px rgba(99,102,241,0.3);
+    height: auto !important;
+}
+.wpssl-save-btn:hover {
+    background: #4f46e5 !important;
+    color: #fff !important;
+    box-shadow: 0 3px 8px rgba(99,102,241,0.4);
+}
+.wpssl-save-btn .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    margin-top: 1px;
+}
+
+/* Tabs */
+.wpssl-tabs {
+    display: flex;
+    gap: 0;
+    margin-top: 4px;
+}
+.wpssl-tab {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #64748b;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    transition: color 0.15s, border-color 0.15s;
+}
+.wpssl-tab:hover { color: #6366f1; border-bottom-color: #c7d2fe; }
+.wpssl-tab--active { color: #6366f1 !important; border-bottom-color: #6366f1 !important; font-weight: 600; }
+.wpssl-tab .dashicons { font-size: 16px; width: 16px; height: 16px; }
+
+/* ========================================
+   NOTICES AREA
+   ======================================== */
+.wpssl-notices-area {
+    max-width: 1200px;
+    margin: 16px auto 0;
+    padding: 0 4px;
+}
+.wpssl-notices-area .notice { margin: 0 0 8px; }
+
+/* ========================================
+   LAYOUT
+   ======================================== */
 .wpssl-admin-layout {
     display: grid;
     grid-template-columns: 1fr 380px;
     gap: 24px;
+    max-width: 1200px;
+    margin: 20px auto 0;
     align-items: start;
 }
 
-/* Section cards */
-.wpssl-section {
+/* ========================================
+   CARDS
+   ======================================== */
+.wpssl-card {
     background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 20px 24px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 22px 24px;
     margin-bottom: 20px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
-.wpssl-section-title {
-    margin: 0 0 16px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid #f3f4f6;
-    font-size: 14px;
-    font-weight: 600;
-    color: #111827;
+.wpssl-card-title {
+    margin: 0 0 18px !important;
+    padding-bottom: 14px;
+    border-bottom: 1px solid #f1f5f9;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    color: #0f172a !important;
 }
-.wpssl-section .form-table th { width: 180px; font-weight: 500; }
+.wpssl-card-desc {
+    margin: -10px 0 14px;
+    font-size: 12px;
+    color: #64748b;
+}
+.wpssl-subcard-title {
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    margin: 0 0 12px !important;
+    color: #374151 !important;
+}
+.wpssl-divider {
+    border: none;
+    border-top: 1px solid #f1f5f9;
+    margin: 20px 0;
+}
 
-/* Toggle */
+/* ========================================
+   FIELDS
+   ======================================== */
+.wpssl-field {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 12px;
+    align-items: start;
+    padding: 12px 0;
+    border-bottom: 1px solid #f8fafc;
+}
+.wpssl-field:last-child { border-bottom: none; }
+
+.wpssl-field-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #374151;
+    padding-top: 4px;
+}
+.wpssl-field-control { display: flex; flex-direction: column; gap: 6px; }
+.wpssl-inline-control { flex-direction: row !important; align-items: center; gap: 10px !important; flex-wrap: wrap; }
+.wpssl-radio-row { flex-direction: row !important; flex-wrap: wrap; gap: 16px !important; }
+
+.wpssl-checkbox-label,
+.wpssl-radio-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    color: #374151;
+    cursor: pointer;
+    margin: 2px 0;
+}
+
+.wpssl-field-hint {
+    font-size: 12px;
+    color: #94a3b8;
+    line-height: 1.4;
+}
+.wpssl-hint-warning { color: #f59e0b; }
+
+/* ========================================
+   TOGGLE SWITCH
+   ======================================== */
 .wpssl-toggle {
     position: relative;
     display: inline-block;
-    width: 44px;
-    height: 24px;
-    vertical-align: middle;
-    margin-right: 10px;
+    width: 42px;
+    height: 22px;
+    flex-shrink: 0;
 }
 .wpssl-toggle input { opacity: 0; width: 0; height: 0; }
 .wpssl-toggle-slider {
     position: absolute;
     cursor: pointer;
     inset: 0;
-    background: #d1d5db;
-    border-radius: 24px;
-    transition: .3s;
+    background: #cbd5e1;
+    border-radius: 22px;
+    transition: background 0.25s;
 }
 .wpssl-toggle-slider:before {
     content: '';
     position: absolute;
-    height: 18px; width: 18px;
+    height: 16px; width: 16px;
     left: 3px; bottom: 3px;
     background: #fff;
     border-radius: 50%;
-    transition: .3s;
+    transition: transform 0.25s;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
 }
 .wpssl-toggle input:checked + .wpssl-toggle-slider { background: #6366f1; }
 .wpssl-toggle input:checked + .wpssl-toggle-slider:before { transform: translateX(20px); }
+.wpssl-toggle input:disabled + .wpssl-toggle-slider { opacity: 0.5; cursor: not-allowed; }
 
-/* Networks list */
+/* ========================================
+   NETWORKS LIST
+   ======================================== */
 .wpssl-networks-list {
-    margin: 0;
-    padding: 0;
-    list-style: none;
+    margin: 0 !important;
+    padding: 0 !important;
+    list-style: none !important;
 }
 .wpssl-network-item {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 8px 10px;
-    border: 1px solid #e5e7eb;
-    border-radius: 6px;
+    padding: 9px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 7px;
     margin-bottom: 6px;
     background: #fafafa;
-    cursor: grab;
+    cursor: default;
+    transition: background 0.1s;
+    user-select: none;
 }
-.wpssl-network-item:hover { background: #f3f4f6; }
-.wpssl-drag-handle { cursor: grab; color: #9ca3af; }
+.wpssl-network-item:hover { background: #f1f5f9; }
+.wpssl-network-item.ui-sortable-helper {
+    background: #fff !important;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    border-color: #6366f1;
+}
+.wpssl-network-item.ui-sortable-placeholder {
+    background: #ede9fe !important;
+    border: 2px dashed #a5b4fc !important;
+    visibility: visible !important;
+}
+.wpssl-drag-handle {
+    cursor: grab;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    padding: 2px;
+}
+.wpssl-drag-handle:active { cursor: grabbing; }
+.wpssl-net-checkbox { cursor: pointer; margin: 0; }
 .wpssl-net-dot {
-    display: inline-block;
     width: 10px; height: 10px;
     border-radius: 50%;
     flex-shrink: 0;
+    display: inline-block;
+}
+.wpssl-net-name { font-size: 13px; color: #374151; }
+
+/* ========================================
+   COLOR PICKERS
+   ======================================== */
+.wpssl-color-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.wpssl-color-label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 12px;
+    color: #64748b;
 }
 
-/* Preview Panel */
-.wpssl-preview-panel {
-    position: sticky;
-    top: 32px;
+/* ========================================
+   BADGE
+   ======================================== */
+.wpssl-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+}
+.wpssl-badge--warning { background: #fef3c7; color: #92400e; }
+
+/* ========================================
+   FORM FOOTER
+   ======================================== */
+.wpssl-form-footer {
+    padding: 20px 0 40px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+/* ========================================
+   LIVE PREVIEW PANEL
+   ======================================== */
+.wpssl-preview-panel { position: sticky; top: 32px; }
+
+.wpssl-preview-card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
 .wpssl-preview-header {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px;
+    justify-content: space-between;
+    padding: 14px 18px;
+    border-bottom: 1px solid #f1f5f9;
 }
-.wpssl-preview-header h3 { margin: 0; }
+.wpssl-preview-header h3 {
+    margin: 0 !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    color: #0f172a !important;
+}
+.wpssl-preview-refresh-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: #f1f5f9 !important;
+    border: 1px solid #e2e8f0 !important;
+    color: #475569 !important;
+    border-radius: 5px;
+    padding: 5px 12px !important;
+    font-size: 12px !important;
+    cursor: pointer;
+    transition: background 0.15s;
+    height: auto !important;
+}
+.wpssl-preview-refresh-btn:hover { background: #e2e8f0 !important; }
+.wpssl-preview-refresh-btn .dashicons { font-size: 14px; width: 14px; height: 14px; }
+
 .wpssl-preview-box {
-    background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 20px;
-    min-height: 200px;
+    padding: 18px;
+    min-height: 160px;
+    background: #fafafa;
+}
+.wpssl-mock-article { margin: 12px 0; }
+.wpssl-mock-bar {
+    background: #e2e8f0;
+    border-radius: 4px;
+    display: block;
 }
 .wpssl-preview-placeholder {
-    color: #9ca3af;
+    color: #94a3b8;
     text-align: center;
-    margin-top: 40px;
+    font-size: 12px;
     font-style: italic;
+    padding: 30px 0;
+    margin: 0;
 }
-.wpssl-preview-mock-content { margin: 12px 0; }
-.wpssl-mock-title {
-    height: 18px;
-    background: #e5e7eb;
-    border-radius: 4px;
-    margin-bottom: 8px;
-    width: 60%;
+.wpssl-preview-note {
+    padding: 8px 18px;
+    margin: 0 !important;
+    font-size: 11px;
+    color: #94a3b8;
+    border-top: 1px solid #f1f5f9;
+    background: #fff;
 }
-.wpssl-mock-text {
-    height: 10px;
-    background: #f3f4f6;
-    border-radius: 4px;
-    margin-bottom: 6px;
-}
-.wpssl-mock-text--short { width: 70%; }
 
-/* Stats grid */
+/* Scoped preview: prevent public CSS icons from blowing up */
+#wpssl-preview-output .wpssl-icon svg {
+    width: 16px !important;
+    height: 16px !important;
+    display: inline-block !important;
+    vertical-align: middle !important;
+}
+#wpssl-preview-output .wpssl-wrap {
+    margin: 12px 0 !important;
+    padding: 12px !important;
+}
+#wpssl-preview-output img { max-width: none !important; }
+
+/* ========================================
+   STATS PAGE
+   ======================================== */
+.wpssl-stats-page { max-width: 1200px; margin: 20px auto 0; }
+
 .wpssl-stats-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
     gap: 16px;
-    margin-bottom: 20px;
 }
 .wpssl-stat-card {
     background: #fff;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
-    padding: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 18px;
     text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
 }
-.wpssl-stat-card--big {
-    background: #6366f1;
-    color: #fff;
+.wpssl-stat-card--hero {
+    background: linear-gradient(135deg, #6366f1, #818cf8);
+    border: none;
     grid-column: span 2;
 }
-.wpssl-stat-card--big .wpssl-stat-number { font-size: 36px; color: #fff; }
-.wpssl-stat-card--big .wpssl-stat-label { color: rgba(255,255,255,0.8); }
-.wpssl-stat-icon { width: 28px; height: 28px; margin: 0 auto 8px; }
-.wpssl-stat-icon svg { width: 100%; height: 100%; }
-.wpssl-stat-number { font-size: 24px; font-weight: 700; color: #111827; line-height: 1; }
-.wpssl-stat-label { font-size: 12px; color: #6b7280; margin-top: 4px; }
+.wpssl-stat-card--hero .wpssl-stat-number { font-size: 40px; color: #fff; }
+.wpssl-stat-card--hero .wpssl-stat-label { color: rgba(255,255,255,0.85); }
+.wpssl-stat-icon { width: 26px; height: 26px; margin: 0 auto 8px; }
+.wpssl-stat-icon svg { width: 100%; height: 100%; display: block; }
+.wpssl-stat-number { font-size: 22px; font-weight: 700; color: #0f172a; line-height: 1; }
+.wpssl-stat-label { font-size: 11px; color: #64748b; margin-top: 4px; }
 
-/* Preview shared styles injection */
-#wpssl-preview-output .wpssl-wrap { font-family: -apple-system, sans-serif; }
+.wpssl-net-badge {
+    display: inline-block;
+    margin: 2px;
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 4px;
+    color: #fff;
+    white-space: nowrap;
+}

@@ -3,51 +3,67 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 
 class WPSSL_Renderer {
 
+    /**
+     * Render the share bar.
+     * @param int|null   $post_id         Post ID, or null for current post.
+     * @param array|null $preview_options Array of options for admin preview.
+     * @return string HTML
+     */
     public static function render( $post_id = null, $preview_options = null ) {
         if ( ! $post_id ) {
             $post_id = get_the_ID();
         }
 
-        $opts = $preview_options ? $preview_options : WPSSL_Options::instance();
+        // Helper to get a value from either preview array or live options
+        $o = function( $key, $default = '' ) use ( $preview_options ) {
+            if ( is_array( $preview_options ) ) {
+                return isset( $preview_options[ $key ] ) ? $preview_options[ $key ] : $default;
+            }
+            return WPSSL_Options::instance()->get( $key, $default );
+        };
 
-        $networks    = is_array( $opts ) ? ( $opts['networks'] ?? [] ) : $opts->get('networks');
-        $icon_style  = is_array( $opts ) ? ( $opts['icon_style'] ?? 'icon_label' ) : $opts->get('icon_style');
-        $show_count  = is_array( $opts ) ? ( $opts['show_share_count'] ?? '1' ) : $opts->get('show_share_count');
-        $show_total  = is_array( $opts ) ? ( $opts['show_total_count'] ?? '1' ) : $opts->get('show_total_count');
-        $show_label  = is_array( $opts ) ? ( $opts['show_label'] ?? '1' ) : $opts->get('show_label');
-        $label_text  = is_array( $opts ) ? ( $opts['label_text'] ?? 'Share this:' ) : $opts->get('label_text');
-        $btn_shape   = is_array( $opts ) ? ( $opts['button_shape'] ?? 'rounded' ) : $opts->get('button_shape');
-        $btn_size    = is_array( $opts ) ? ( $opts['button_size'] ?? 'medium' ) : $opts->get('button_size');
-        $color_scheme= is_array( $opts ) ? ( $opts['color_scheme'] ?? 'brand' ) : $opts->get('color_scheme');
-        $custom_bg   = is_array( $opts ) ? ( $opts['custom_bg'] ?? '#333333' ) : $opts->get('custom_bg');
-        $custom_text = is_array( $opts ) ? ( $opts['custom_text'] ?? '#ffffff' ) : $opts->get('custom_text');
-        $hide_mobile = is_array( $opts ) ? ( $opts['hide_on_mobile'] ?? '0' ) : $opts->get('hide_on_mobile');
+        $networks     = (array) $o( 'networks', [] );
+        $icon_style   = $o( 'icon_style',        'icon_label' );
+        $show_count   = $o( 'show_share_count',  '1' );
+        $show_total   = $o( 'show_total_count',  '1' );
+        $show_label   = $o( 'show_label',        '1' );
+        $label_text   = $o( 'label_text',        'Share this:' );
+        $btn_shape    = $o( 'button_shape',      'rounded' );
+        $btn_size     = $o( 'button_size',       'medium' );
+        $color_scheme = $o( 'color_scheme',      'brand' );
+        $custom_bg    = $o( 'custom_bg',         '#333333' );
+        $custom_text  = $o( 'custom_text',       '#ffffff' );
+        $hide_mobile  = $o( 'hide_on_mobile',    '0' );
+        $cl_enabled   = $o( 'custom_link_enabled','0' );
+        $cl_label     = $o( 'custom_link_label', 'Visit' );
+        $cl_url       = $o( 'custom_link_url',   '' );
+        $cl_color     = $o( 'custom_link_color', '#6366f1' );
 
-        if ( empty( $networks ) ) return '';
+        if ( empty( $networks ) && $cl_enabled !== '1' ) return '';
 
-        $post      = get_post( $post_id );
-        $post_url  = get_permalink( $post_id );
-        $post_title= $post ? $post->post_title : '';
-        $thumbnail = get_the_post_thumbnail_url( $post_id, 'full' ) ?: '';
-        $all_nets  = WPSSL_Networks::all();
-        $total     = WPSSL_Share_Count::get_total( $post_id );
+        $post_url   = get_permalink( $post_id ) ?: '';
+        $post_title = get_the_title( $post_id ) ?: '';
+        $thumbnail  = get_the_post_thumbnail_url( $post_id, 'large' ) ?: '';
+        $all_nets   = WPSSL_Networks::all();
+        $total      = WPSSL_Share_Count::get_total( $post_id );
 
-        $wrapper_classes = [
+        // Wrapper classes
+        $classes = [
             'wpssl-wrap',
             'wpssl-shape-' . esc_attr( $btn_shape ),
-            'wpssl-size-' . esc_attr( $btn_size ),
+            'wpssl-size-'  . esc_attr( $btn_size ),
             'wpssl-color-' . esc_attr( $color_scheme ),
         ];
-        if ( $hide_mobile === '1' ) $wrapper_classes[] = 'wpssl-hide-mobile';
+        if ( $hide_mobile === '1' ) $classes[] = 'wpssl-hide-mobile';
 
-        $custom_style = '';
+        $inline_style = '';
         if ( $color_scheme === 'custom' ) {
-            $custom_style = ' style="--wpssl-custom-bg:' . esc_attr( $custom_bg ) . ';--wpssl-custom-text:' . esc_attr( $custom_text ) . ';"';
+            $inline_style = ' style="--wpssl-custom-bg:' . esc_attr( $custom_bg ) . ';--wpssl-custom-text:' . esc_attr( $custom_text ) . ';"';
         }
 
-        $html  = '<div class="' . implode( ' ', $wrapper_classes ) . '" data-post-id="' . esc_attr( $post_id ) . '"' . $custom_style . '>';
+        $html  = '<div class="' . implode( ' ', $classes ) . '" data-post-id="' . esc_attr( $post_id ) . '"' . $inline_style . '>';
 
-        if ( $show_label === '1' ) {
+        if ( $show_label === '1' && $label_text ) {
             $html .= '<span class="wpssl-label">' . esc_html( $label_text ) . '</span>';
         }
 
@@ -57,37 +73,55 @@ class WPSSL_Renderer {
 
         $html .= '<div class="wpssl-buttons">';
 
+        // Social network buttons
         foreach ( $networks as $network ) {
             if ( ! isset( $all_nets[ $network ] ) ) continue;
 
-            $net_data  = $all_nets[ $network ];
+            $nd        = $all_nets[ $network ];
             $share_url = WPSSL_Networks::get_share_url( $network, $post_url, $post_title, $thumbnail );
             $svg       = WPSSL_Networks::get_svg( $network );
             $count     = WPSSL_Share_Count::get( $post_id, $network );
             $target    = $network === 'email' ? '' : ' target="_blank" rel="noopener noreferrer"';
-            $is_copy   = $network === 'copy_link' ? ' data-action="copy" data-url="' . esc_url( $post_url ) . '"' : '';
-            $aria      = 'Share on ' . $net_data['label'];
+            $is_copy   = $network === 'copy_link'
+                         ? ' data-action="copy" data-url="' . esc_url( $post_url ) . '"'
+                         : '';
 
             $btn_style = '';
             if ( $color_scheme === 'brand' ) {
-                $btn_style = ' style="--wpssl-brand:' . esc_attr( $net_data['color'] ) . ';"';
+                $btn_style = ' style="--wpssl-brand:' . esc_attr( $nd['color'] ) . ';"';
             }
 
-            $html .= '<a href="' . esc_url( $share_url ) . '" class="wpssl-btn wpssl-net-' . esc_attr( $network ) . '"'
+            $html .= '<a href="' . esc_url( $share_url ) . '"'
+                   . ' class="wpssl-btn wpssl-net-' . esc_attr( $network ) . '"'
                    . $target . $is_copy . $btn_style
                    . ' data-platform="' . esc_attr( $network ) . '"'
-                   . ' aria-label="' . esc_attr( $aria ) . '">';
+                   . ' aria-label="Share on ' . esc_attr( $nd['label'] ) . '">';
 
             $html .= '<span class="wpssl-icon">' . $svg . '</span>';
 
             if ( $icon_style === 'icon_label' ) {
-                $html .= '<span class="wpssl-net-label">' . esc_html( $net_data['label'] ) . '</span>';
+                $html .= '<span class="wpssl-net-label">' . esc_html( $nd['label'] ) . '</span>';
             }
 
             if ( $show_count === '1' ) {
                 $html .= '<span class="wpssl-count" data-platform="' . esc_attr( $network ) . '">' . esc_html( $count ) . '</span>';
             }
 
+            $html .= '</a>';
+        }
+
+        // Custom link button
+        if ( $cl_enabled === '1' && $cl_label ) {
+            $btn_url = $cl_url ?: $post_url;
+            $html .= '<a href="' . esc_url( $btn_url ) . '"'
+                   . ' class="wpssl-btn wpssl-btn-custom-link"'
+                   . ' style="background:' . esc_attr( $cl_color ) . ';color:#fff;--wpssl-brand:' . esc_attr( $cl_color ) . ';"'
+                   . ' target="_blank" rel="noopener noreferrer"'
+                   . ' aria-label="' . esc_attr( $cl_label ) . '">';
+            $html .= '<span class="wpssl-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M10 6v2H5v11h11v-5h2v7H3V6h7zm11-3v8h-2V6.413l-7.793 7.794-1.414-1.414L17.585 5H13V3h8z"/></svg></span>';
+            if ( $icon_style === 'icon_label' ) {
+                $html .= '<span class="wpssl-net-label">' . esc_html( $cl_label ) . '</span>';
+            }
             $html .= '</a>';
         }
 
@@ -105,9 +139,13 @@ class WPSSL_Renderer {
             return '';
         }
 
-        $pos_class = 'wpssl-floating wpssl-floating-' . str_replace( 'floating_', '', str_replace( 'sticky_', 'sticky-', $position ) );
-        $inner     = self::render( $post_id );
+        $map = [
+            'floating_left'  => 'left',
+            'floating_right' => 'right',
+            'sticky_bottom'  => 'sticky-bottom',
+        ];
+        $pos_class = 'wpssl-floating wpssl-floating-' . $map[ $position ];
 
-        return '<div class="' . esc_attr( $pos_class ) . '">' . $inner . '</div>';
+        return '<div class="' . esc_attr( $pos_class ) . '">' . self::render( $post_id ) . '</div>';
     }
 }
